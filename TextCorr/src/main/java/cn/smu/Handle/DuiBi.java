@@ -20,7 +20,7 @@ public class DuiBi {
         duiBi.reportMapper=this.reportMapper;
     }
     public OldNew work(String manuscript, String contrasttext){
-        char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
+        /*char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
         char[] enSignArr = "`!@#$%^&*()_+~-=[];',./{}|:\"<>?".toCharArray();
         for (int i = 0; i < cnSignArr.length; i++) {
             manuscript = manuscript.replace("" + cnSignArr[i], "");
@@ -29,7 +29,7 @@ public class DuiBi {
         for (int i = 0; i < enSignArr.length; i++) {
             manuscript = manuscript.replace("" + enSignArr[i], "");
             contrasttext = contrasttext.replace("" + enSignArr[i], "");
-        }
+        }*/
        manuscript = manuscript.replace(" ", "");
         manuscript = manuscript.replace("\r", "");
         manuscript=manuscript.replace("\n","");
@@ -186,15 +186,19 @@ public class DuiBi {
         }
         System.out.println(ystring);
         System.out.println(cstring);
-        oldNew.setYtext(ystring);
-        oldNew.setDtext(cstring);
         Report report=new Report();
         report.setId(1);
-        report.setPipei(String.format("%.2f",sum/clen*100).toString()+"%");
+        if (manuscript.length()<clen){
+            report.setPipei(String.format("%.2f",sum/manuscript.length()*100).toString()+"%");
+        }else{
+            report.setPipei(String.format("%.2f",sum/clen*100).toString()+"%");
+        }
         report.setWrong(wsum);
         report.setMuch(fu);
         report.setLess(ls);
         duiBi.reportMapper.update(report,new UpdateWrapper<Report>().set("pipei",report.getPipei()).set("wrong",report.getWrong()).set("much",report.getMuch()).set("less",report.getLess()).eq("id",1));
+        oldNew.setYtext(ystring);
+        oldNew.setDtext(cstring);
         return oldNew;
     }
 }

@@ -32,7 +32,7 @@ public class Lischtxt11 {
         mp3File = new MP3File(AUDIO_FILE_PATH);//封装好的类
         MP3AudioHeader header = mp3File.getMP3AudioHeader();
         System.out.println("时长: " + header.getTrackLength()); //获得时长
-        String line = "/usr/local/ffmpeg/ffmpeg-4.4-amd64-static/ffmpeg -i %s -f segment -segment_time 300 -c copy %s";
+        String line = "/usr/local/ffmpeg/ffmpeg-4.4-amd64-static/ffmpeg -i %s -f segment -segment_time 90 -c copy %s";
        line=String.format(line,AUDIO_FILE_PATH,"/home/TextCorr-1.0/fglisten/g%2d.mp3");
         //String line = "D:\\ffmpeg-4.4-essentials_build\\bin\\ffmpeg.exe -i %s -f segment -segment_time 90 -c copy %s";
         //line=String.format(line,AUDIO_FILE_PATH,"D:\\音频分割\\g%2d.mp3");

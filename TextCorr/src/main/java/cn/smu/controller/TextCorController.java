@@ -92,9 +92,15 @@ public class TextCorController {
                 ystring=ystr[0];
             }
             for (int i=1;i<j;i++){
-                ystring=ystring+"\n"+ystr[i];
+                if (String.valueOf(ystring.charAt(ystring.length()-1)).equals("。")){
+                    ystring=ystring+"\n"+ystr[i];
+                }else{
+                    ystring=ystring+"。"+"\n"+ystr[i];
+                }
             }
             new Thread(() -> {
+                if (String.valueOf(ystring.charAt(ystring.length()-1)).equals("。")==false)
+                    ystring=ystring+"。";
                 textService.setytext(ystring);
             }).start();
             new Thread(() -> {
@@ -103,7 +109,7 @@ public class TextCorController {
             }).start();
             //getfile.delete();
             //textService.setytext(ystring);
-            char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
+           /* char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
             char[] enSignArr = "`!@#$%^&*()_+~-=[];',./{}|:\"<>?".toCharArray();
             for (int i = 0; i < cnSignArr.length; i++) {
                 ystring = ystring.replace("" + cnSignArr[i], "");
@@ -111,10 +117,7 @@ public class TextCorController {
             for (int i = 0; i < enSignArr.length; i++) {
                 ystring = ystring.replace("" + enSignArr[i], "");
             }
-            System.out.println(ystring);
-           /* Fname fname=new Fname();
-            fnameMapper.update(fname,new UpdateWrapper<Fname>().set("yfilename",fileName).eq("id",1));
-            getfile.delete();*/
+            System.out.println(ystring);*/
             return fileName;
         }
     }
@@ -123,7 +126,7 @@ public class TextCorController {
     @ResponseBody
     public String totext() throws Exception{
             String ystring=textService.sel().getYtext();
-        char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
+        /*char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
         char[] enSignArr = "`!@#$^&()[]\\;',{}|:\"<>?".toCharArray();
             for (int i = 0; i < cnSignArr.length; i++) {
                 ystring = ystring.replace("" + cnSignArr[i], "");
@@ -131,7 +134,7 @@ public class TextCorController {
             for (int i = 0; i < enSignArr.length; i++) {
                 ystring = ystring.replace("" + enSignArr[i], "");
             }
-            System.out.println(ystring);
+            System.out.println(ystring);*/
             String str=ystring.replace("\n","");
             return str;
     }
@@ -157,32 +160,5 @@ public class TextCorController {
         Report report=new Report();
         report=reportMapper.selectById(1);
         return report;
-    }
-
-    @PostMapping( "/upload1")
-    @ResponseBody
-    public Object upload1(@RequestParam("file") MultipartFile file) throws Exception{
-        if (file.isEmpty()) {
-            return "上传失败，请选择文件";
-        }else{
-            String fileName = file.getOriginalFilename();
-            //即上传文件路径path为：resources/static/qqwry。
-            //File file1=new File(path);
-            File path = new File(ResourceUtils.getURL("classpath:").getPath());
-           //String path = ResourceUtils.getURL("classpath:").getPath();
-            if(!path.exists()) {
-                path = new File("");
-
-            }
-            //System.out.println(ResourceUtils.getURL("classpath:").getPath());
-            File upload = new File(path.getAbsolutePath(),"static/"+fileName);
-            if (!upload.exists()){
-                upload.mkdirs();
-            }
-            file.transferTo(upload);
-            /*ClassPathResource classPathResource = new ClassPathResource(fileName);
-            InputStream inputStream = classPathResource.getInputStream();*/
-            return fileName;
-        }
     }
 }

@@ -269,5 +269,14 @@ public class ApplicationTest {
     public void jsontext() throws Exception{
        //Lischtxt11 lischtxt11=new Lischtxt11();
        //lischtxt11.listxt("cq.mp3");
+       // String ystring=textService.sel().getYtext();
+        //System.out.println(ystring);
+        String s="ds";
+        if (s.equals("s")){
+            System.out.println("true");
+        }else{
+            System.out.println("f");
+        }
+
     }
 }

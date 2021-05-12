@@ -95,14 +95,14 @@ public class ListenController {
                 textService.setdtext(string2);
             }).start();
         }
-        char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
+        /*char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
         char[] enSignArr = "`!@#$%^&*()_+~-=[];',./{}|:\"<>?".toCharArray();
         for (int i = 0; i < cnSignArr.length; i++) {
             string2 = string2.replace("" + cnSignArr[i], "");
         }
         for (int i = 0; i < enSignArr.length; i++) {
             string2 = string2.replace("" + enSignArr[i], "");
-        }
+        }*/
         System.out.println(string2);
         return string2;
     }
