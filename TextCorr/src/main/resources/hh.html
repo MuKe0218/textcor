@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>哈哈哈</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="total">
+    <div class="login" id="app">
+      <button v-on:click="login">获取</button>
+        <div >大家好这里是杰克我跟特里斯顿在一起今天我们会进行水<span style="background-color: #cd2020;">肺</span>潜水看看我们在桥下能找到什么特里斯顿请我来<span style="background-color: #cd2020;">的</span>这里他说他打量这里有一阵了他认为我们可能能找到不止一把不止两把<span style="background-color: #3327c1;">而</span><span style="background-color: #3327c1;">是</span><span style="background-color: #cd2020;">五</span>把枪我在佛罗里达找枪来着我什么都没找到我真<span style="background-color: #cd2020;">挺</span><span style="background-color: #cd2020;">想</span>来一把<span style="background-color: #3327c1;">的</span>压力好大<span style="background-color: #cd2020;">啊</span>你觉得这地方不错吗我压力好大不过我觉得这是条繁忙的道路水<span style="background-color: #cd2020;">道</span>也不错我们或许能挖个武器或是被偷的什么东西所以说我觉得能找到点好东西好我看过一个<span style="background-color: #cd2020;">秀</span><span style="background-color: #cd2020;">叫</span>外滩<span style="background-color: #cd2020;">探</span><span style="background-color: #cd2020;">秘</span>我还真挺想找点真的宝藏的我觉得我有这种联系能成功实现如果你想看<span style="background-color: #3327c1;">到</span>的话点个赞</div>
+        <div>大家好这里是杰克我跟特里斯顿在一起今天我们会进行水<span style="background-color: #cd2020;">费</span>潜水看看我们在桥下能找到什么特里斯顿请我来<span style="background-color: #cd2020;">到</span>这里他说他打量这里有一阵了他认为我们可能能找到不止一把不止两把<span style="background-color: #cd2020;">手</span>把枪我在佛罗里达找枪来着我什么都没找到我真<span style="background-color: #cd2020;">听</span><span style="background-color: #cd2020;">下</span>来一把压力好大<span style="background-color: #cd2020;">呀</span>你觉得这地方不错吗我压力好大不过我觉得这是条繁忙的道路水<span style="background-color: #cd2020;">痘</span>也不错我们或许能挖个武器或是被偷的什么东西所以说我觉得能找到点好东西好我看过一个<span style="background-color: #cd2020;">笑</span><span style="background-color: #cd2020;">笑</span>外滩<span style="background-color: #cd2020;">很</span><span style="background-color: #cd2020;">密</span>我还真挺想找点真的宝藏的我觉得我有这种联系能成功实现如果你想看的话点个赞</div>
+        <div>{{this.msgg.ytext}}</div>
+        <div>
+            <input type="file">
+        </div>
+    </div>
+</div>
+
+<script type = "text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            msg: "有这个消息即vue可用",
+            title: null,
+            msgg:{}
+        },
+        methods: {
+            login: function () {
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:3000/Text/textcor1',
+                    data: {
+                    }
+                }).then(function (response) {
+                    this.msgg=response.data;
+                        //alert(response);
+                    console.log(this.msgg);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+
+    })
+</script>
+</body>
+</html>
