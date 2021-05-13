@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: "admin123"
+    url: jdbc:mysql://120.77.251.202:3306/textcor?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.jdbc.Driver
+  http:
+      multipart:
+      enabled: false
+
+  servlet:
+      multipart:
+        enabled: true
+  # 上传文件总的最大值
+        max-request-size: 1000MB
+  # 单个文件的最大值
+        max-file-size: 1000MB
+
+mybatis-plus:
+  # 全局主键策略
+  global-config:
+    db-config:
+      id-type: auto # 设置为数据库ID自增
