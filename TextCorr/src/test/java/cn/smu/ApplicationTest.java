@@ -276,12 +276,45 @@ public class ApplicationTest {
        //lischtxt11.listxt("cq.mp3");
        // String ystring=textService.sel().getYtext();
         //System.out.println(ystring);
-        String s="ds";
+       /* String s="ds";
         if (s.equals("s")){
             System.out.println("true");
         }else{
             System.out.println("f");
+        }*/
+        String manuscript = "基本铲球" +
+                "把球踢到你正前方大约4至5米（13-15英尺）的位置，然后追着球跑。弯曲左腿，以左腿外侧铲球，用手臂保持平衡当球触手可及时，右腿猛然发力，用脚背将球踢开，然后尽快站起来。" +
+                "提示" +
+                "在铲球后保持左腿弯曲，这样你就可以用这条腿站起来。" +
+                "最常犯的错误" +
+                "未找准铲球时机，踢球啥。";//原稿
+        String contrasttext = "基本铲h球，把球踢到你正前方大约4~5米，13~15英尺的位置，然后追着球跑，弯曲左腿，" +
+                "以左腿外侧铲球，用手臂保持平衡，当球触手可及时，右腿猛然发力，用脚背将球踢开，" +
+                "然后尽快站起来，提示在铲球后保持左腿弯曲，这样你就可以用这条腿站起来。" +
+                "最常犯的错误为找准铲球时机，踢不到球。";//对比稿
+       /* manuscript=manuscript.replace("，","。");
+        char[] cnSignArr = "？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
+        char[] enSignArr = "`!@#$%^&*()_+~-=[];',./{}|:\"<>?".toCharArray();
+        for (int i = 0; i < cnSignArr.length; i++) {
+            manuscript = manuscript.replace("" + cnSignArr[i], "");
         }
+        for (int i = 0; i < enSignArr.length; i++) {
+            manuscript = manuscript.replace("" + enSignArr[i], "");
+        }
+        int juhao[]=new int[manuscript.length()];
+        int ju=0;
+        for (int i=0;i<manuscript.length();i++){
+            if (manuscript.charAt(i)=='。'){
+                juhao[ju]=i;
+                ju++;
+            }
+        }
+        System.out.println(manuscript.replace("。",""));
+        for (int i=0;i<ju;i++){
+            System.out.println(juhao[i]);
+        }*/
+       DuiBi duiBi=new DuiBi();
+       System.out.print(duiBi.work(manuscript,contrasttext));
 
     }
 }

@@ -20,7 +20,8 @@ public class DuiBi {
         duiBi.reportMapper=this.reportMapper;
     }
     public OldNew work(String manuscript, String contrasttext){
-        char[] cnSignArr = "。？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
+        manuscript=manuscript.replace("，","。");
+        char[] cnSignArr = "？！，、；：“” ‘’「」『』（）〔〕【】—﹏…～·《》〈〉".toCharArray();
         char[] enSignArr = "`!@#$%^&*()_+~-=[];',./{}|:\"<>?".toCharArray();
         for (int i = 0; i < cnSignArr.length; i++) {
             manuscript = manuscript.replace("" + cnSignArr[i], "");
@@ -30,6 +31,22 @@ public class DuiBi {
             manuscript = manuscript.replace("" + enSignArr[i], "");
             contrasttext = contrasttext.replace("" + enSignArr[i], "");
         }
+
+        int juhao[]=new int[manuscript.length()];
+        int ju=0;
+        for (int i=0;i<manuscript.length();i++){
+            if (manuscript.charAt(i)=='。'){
+                juhao[ju]=i;
+                ju++;
+            }
+        }
+        /*for (int i=0;i<ju;i++){
+            System.out.println(juhao[i]);
+        }*/
+        //System.out.println(manuscript);
+        //System.out.println(contrasttext);
+        manuscript=manuscript.replace("。","");
+        contrasttext=contrasttext.replace("。","");
        /*manuscript = manuscript.replace(" ", "");
         manuscript = manuscript.replace("\r", "");
         manuscript=manuscript.replace("\n","");*/
@@ -37,7 +54,7 @@ public class DuiBi {
         //manuscript=manuscript.replace("，","。");
         //contrasttext=contrasttext.replace("，","。");
         //System.out.println(manuscript);
-        Texttwenty texttwenty=new Texttwenty();
+        //Texttwenty texttwenty=new Texttwenty();
         //manuscript=texttwenty.Texttw(manuscript);
         //contrasttext=texttwenty.Texttw(contrasttext);
         int len=0;
@@ -61,19 +78,80 @@ public class DuiBi {
             if(s[i]=='-'){//多的
                 full[fu]=i;
                 fu++;
-                System.out.println(String.valueOf(p[i]));
+                //System.out.println(String.valueOf(p[i]));
             }else if(p[i]=='-'){//少的
                 less[ls]=i;
                 ls++;
-                System.out.println(String.valueOf(s[i]));
+                //System.out.println(String.valueOf(s[i]));
             }else if(s[i]!=p[i]){//错的
                 wrong[wsum]=i;
                 wsum++;
-                System.out.println(String.valueOf(s[i])+"--"+String.valueOf(p[i]));
+                //System.out.println(String.valueOf(s[i])+"--"+String.valueOf(p[i]));
             }
         }
-        System.out.println(dnas1);
-        System.out.println(dnas2);
+        //System.out.println(dnas1);
+        //System.out.println(dnas2);
+        //新增
+        String[] strdnas1=new String[dnas1.length()];
+        String[] strdnas2=new String[dnas2.length()];
+        for (int i=0;i<dnas1.length();i++){
+            strdnas1[i]=dnas1.substring(i,i+1);
+        }
+        for (int i=0;i<dnas2.length();i++){
+            strdnas2[i]=dnas2.substring(i,i+1);
+        }
+        String newdans1=strdnas1[0];
+        String newdans2=strdnas2[0];
+        int dnask=0;
+        int gd=0;
+        int juhao2[]=new int[ju];
+        for (int i=0;i<ju-1;i++){
+            for(int o=gd;o<=juhao[i]-i;o++){
+                if (strdnas1[o].equals("-")){
+                    dnask++;
+                }
+                //System.out.println(strdnas1[o]);
+            }
+            gd=juhao[i];
+            juhao2[i]=juhao[i]+dnask;
+        }
+        /*for (int i=0;i<ju-1;i++){
+            System.out.println(juhao2[i]);
+        }*/
+        //System.out.println(dnas1.length());
+        int r=0;
+        int rr=0;
+        for (int i=1;i<dnas2.length();i++){
+            for (int l=r;l<ju;l++){
+                if (i==juhao2[l]-l){
+                    r=l;
+                    rr=1;
+                }
+            }
+            if (rr==1){
+                newdans2=newdans2+"。"+strdnas1[i];
+                rr=0;
+            }else{
+                newdans2=newdans2+strdnas2[i];
+            }
+        }
+        //System.out.println(newdans2);
+        String string=newdans2.replace("-","");
+        //System.out.println(string);
+        int[] cjuhao=new int[string.length()];
+        int cju=0;
+        for (int i=0;i<string.length();i++){
+            if (string.charAt(i)=='。'){
+                cjuhao[cju]=i;
+                cju++;
+            }
+        }
+        /*for (int i=0;i<cju;i++){
+            System.out.println(cjuhao[i]);
+        }*/
+
+
+
         int clen=contrasttext.length();
         float sum=clen-(fu+wsum);
         System.out.println("匹配率为:"+String.format("%.2f",sum/clen*100).toString()+"%");
@@ -182,13 +260,43 @@ public class DuiBi {
             }
         }
         String ystring=ystr[0];
+        int ykk=0;
+        int flag=0;
         for (int i=1;i<manuscript.length();i++){
-            ystring=ystring+ystr[i];
+            for (int l=ykk;l<ju;l++){
+                if (i==juhao[l]-l){
+                    //System.out.println(i+":"+ystr[i]);
+                    flag=1;
+                    ykk=l;
+                }
+            }
+            if (flag==1){
+                ystring=ystring+"。"+ystr[i];
+                flag=0;
+            }else{
+                ystring=ystring+ystr[i];
+            }
         }
+        ystring=ystring+"。";
         String cstring=cstr[0];
+        int cykk=0;
+        int cflag=0;
         for (int i=1;i<contrasttext.length();i++){
-            cstring=cstring+cstr[i];
+            for (int l=cykk;l<cju;l++){
+                if (i==cjuhao[l]-l){
+                    //System.out.println(i+":"+ystr[i]);
+                    cflag=1;
+                    cykk=l;
+                }
+            }
+            if (cflag==1){
+                cstring=cstring+"。"+cstr[i];
+                cflag=0;
+            }else{
+                cstring=cstring+cstr[i];
+            }
         }
+        cstring=cstring+"。";
         System.out.println(ystring);
         System.out.println(cstring);
         Report report=new Report();

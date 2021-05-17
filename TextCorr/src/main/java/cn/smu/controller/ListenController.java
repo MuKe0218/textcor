@@ -65,7 +65,7 @@ public class ListenController {
             System.out.println(fname.getFilename());
             Lischtxt11 lischtxt11=new Lischtxt11();
             string2=lischtxt11.listxt(fname.getFilename());
-            string2=string2.replace("，","。");
+            //string2=string2.replace("，","。");
             new Thread(()->{
                 textService.setdtext(string2);
             }).start();

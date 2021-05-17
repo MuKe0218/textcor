@@ -107,7 +107,7 @@ public class TextCorController {
     @ResponseBody
     public String totext() throws Exception{
             String ystring=textService.sel().getYtext();
-           ystring=ystring.replace("，","。");
+           //ystring=ystring.replace("，","。");
             return ystring;
     }
 
